@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Autocomplete } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { SimpleGrid, Container } from '@mantine/core';
@@ -9,18 +8,17 @@ import { CompanyModelReq } from '../types/company';
 import LoaderGrid from '../components/loaderGrid';
 
 function SearchCompanies() {
-  const [searchTerm, setSearchTerm] = useState<CompanyModelReq[]>([]);
-  const [companies, setCompanies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');  // Changed to string
+  const [companies, setCompanies] = useState<CompanyModelReq[]>([]);  // Ensured proper typing
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const { searchCompanyDetail } = getCompaniesByFilter();
-
 
   if (isError) {
     return <div>Error fetching companies</div>;
   }
 
-  const handleSearch = async (value: string | any[] | ((prevState: CompanyModelReq[]) => CompanyModelReq[])) => {
+  const handleSearch = async (value: string) => {  // Changed to string
     setSearchTerm(value);
     if (value.length < 3) {
       setCompanies([]);
@@ -48,9 +46,9 @@ function SearchCompanies() {
       <Autocomplete
         placeholder="Search"
         value={searchTerm}
-        onChange={handleSearch}
+        onChange={(event: any) => handleSearch(event.target.value)}  // Adjusted for event handling
         leftSection={<IconSearch style={{ width: 16, height: 16 }} stroke={1.5} />}
-        data={isLoading ? [] : companies.map(company => company.name)} // Adjust based on your data structure
+        data={isLoading ? [] : companies.map(company => company.name || 'No Name')} // Adjust based on your data structure
         visibleFrom="xs"
       />
       <br />
@@ -83,8 +81,5 @@ function SearchCompanies() {
 }
 
 export default SearchCompanies;
-
-
-
-
+``
 

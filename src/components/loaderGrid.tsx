@@ -1,4 +1,3 @@
-import React from 'react'
 import { SimpleGrid, Skeleton, Stack, useMantineTheme, px } from '@mantine/core';
 
 

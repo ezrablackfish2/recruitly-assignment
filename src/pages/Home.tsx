@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCompaniesByFilter } from '../hooks/company_hooks';
 import { CompanyModelReq } from '../types/company';
 import { SimpleGrid, Container } from '@mantine/core';

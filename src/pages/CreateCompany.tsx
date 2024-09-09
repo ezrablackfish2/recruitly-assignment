@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { getCompaniesByFilter } from '../hooks/company_hooks';
 import {
     Container,
